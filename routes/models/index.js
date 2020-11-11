@@ -1,8 +1,17 @@
 const router = require('express').Router();
-const data = require('../../data.json');
+const pool = require('../../db');
 
-router.get('/', (req, res) => {
-  return res.status(200).json(data.models);
+// GET all car models
+router.get('/', async (req, res) => {
+  try {
+    const allModels = await pool.query(
+      'SELECT * FROM models'
+    );
+
+    res.status(200).json(allModels.rows);
+  } catch (error) {
+    console.error(error.message);
+  }
 });
 
 module.exports = router;
