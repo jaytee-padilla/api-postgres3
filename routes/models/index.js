@@ -1,10 +1,10 @@
 const router = require('express').Router();
-const pool = require('../../db');
+const client = require('../../db');
 
 // GET all car models
 router.get('/', async (req, res) => {
   try {
-    const allModels = await pool.query(
+    const allModels = await client.query(
       'SELECT * FROM models'
     );
 
